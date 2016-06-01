@@ -1,0 +1,41 @@
+Setup
+-----
+1. Java 1.7 is pre- requirement to run Elastic Search. So Set JAVA_HOME to jre7 home.
+2. For http support in command line, Configure Curl and add its path to the classpath --> set PATH='%PATH%';C:\..\Softwares\curl-7.40.0-w64;
+
+Creation
+--------
+curl -XPUT "http://localhost:9200/employees/employee/1" -d "{\"name\":\"David\"}" --> Id required with PUT, Creates new or updates existing
+curl -XPOST "http://localhost:9200/employees/employee/" -d "{\"name\":\"David\"}" --> Creates new Id automatically
+employees --> Index
+employee --> Type
+1 --> Id
+
+Retrieve
+--------
+curl -XGET "http://localhost:9200/employees/employee/1?pretty" --> prints it formatted.
+
+Updation
+--------
+curl -XPOST "http://localhost:9200/employees/employee/1?_update" -d "{\"name\" : \"Corleone\"}" --> Updates Existing id
+
+Count
+-----
+http://localhost:9200/_count?pretty -d {query :{matchall:{}}} --> Can be directly used on the browser.
+curl -XGET "http://localhost:9200/_count?pretty" -d "{query :{matchall:{}}}"
+curl -XGET "http://localhost:9200/_count?pretty" ---> Prints total number of elements.
+
+Search
+-------
+curl -XGET "http://localhost:9200/employees/employee/_search?q=name:Vito"
+curl -XGET "http://localhost:9200/_count?pretty" -d "{query :{matchall:{"name":"Vito"}}}" --> using query attribute
+
+
+curl -XGET "http://localhost:9200/_search?pretty" -d "{\"query\":\"filtered\":{\"filter\":{\"range\":{\"age\":{\"gt\":30}}},{\"query\" :{\"matchall\":{\"name\":\"Vito\"}}}}}" 
+
+
+
+
+
+curl -XPOST "http://localhost:9200/employees/employee/?_create" -d "{\"name\" : \"William\",\"age\" : 30,\"about\" : \"Provider Search\",\"interests\":  [ \"ES\",\"SOLR\" ]}"                
+curl -XPOST "http://localhost:9200/employees/employee/?_create" -d "{\"name\" : \"Wallace\",\"age\" : 26,\"about\" : \"Spectrum Search\",\"interests\":  [ \"SQP\",\"FLM\" ,\"SOLR\"]}"
