@@ -1,0 +1,8 @@
+ReduceByKey uses combiner internally thus reducing the no of data that are being passed thr' the network.
+GroubyKey doesnt use combiner and hence large chunk of data will transfered. So better use reduceByKey.
+Groupbykey can be used for other purposes other than aggregate function whereas reducebykey can be used only for aggregation.
+
+ReduceByKey and CombineByKey i/o and O/p should be same. AggregateByKey i/p and o/p can be different.
+ReduceByKey Combiner and Reducer logic is same, CombineByKey reduce and combine logic can be different.
+
+Spark RDD are immutable.
