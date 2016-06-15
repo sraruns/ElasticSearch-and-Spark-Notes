@@ -1,0 +1,3 @@
+Command to get file size
+------------------------
+du -ch /app | grep M | sort -n -r >folderspace.txt
